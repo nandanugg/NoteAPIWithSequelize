@@ -40,13 +40,7 @@ app.post('/user', async (req, res) => {
 })
 app.put('/user/:id', async (req, res) => {
   const { id } = req.params
-  const { username, password, firstName, lastName } = req.body
-  await users.update({
-    username,
-    password,
-    firstName,
-    lastName
-  }, {
+  await users.update(req.body, {
     where: { id }
   })
   res.send("ok")
