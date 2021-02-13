@@ -20,7 +20,7 @@ app.get('/user/:id', async (req, res) => {
   const { id } = req.params
   const result = await users.findAll({
     where: {
-      // id: id
+      // id: id,
       // if property name and value variable is on the same name, we can shorten it like this
       id
     }

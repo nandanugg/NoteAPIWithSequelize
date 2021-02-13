@@ -11,8 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // how to define associations: https://sequelize.org/master/manual/assocs.html
-      notes.hasOne(models.users, { foreignKey: 'id', as: 'from' })
-      // notes.hasOne(models.categories, { foreignKey: 'categoryId', as: 'category' })
     }
   };
   notes.init({

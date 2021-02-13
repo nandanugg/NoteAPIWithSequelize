@@ -1,4 +1,4 @@
-// // sequelize model:create --name notes --attributes note:string
+// sequelize model:create --name categories --attributes note:string
 'use strict';
 module.exports = {
   // because this model is required as reference in notes model, this model should be created first
