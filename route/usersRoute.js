@@ -29,15 +29,14 @@ app.get('/user/:id', async (req, res) => {
 })
 app.post('/user', async (req, res) => {
   const { username, password, firstName, lastName } = req.body
-  await Users.create({
+  const result = await Users.create({
     id: nanoid(),
     username,
     password,
     firstName,
     lastName
   })
-  const result = await Users.findAll({})
-  res.render('index', result)
+  res.send(result)
 })
 app.put('/user/:id', async (req, res) => {
   const { id } = req.params

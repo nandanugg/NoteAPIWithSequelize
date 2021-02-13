@@ -3,8 +3,7 @@ const app = express.Router()
 const { Users } = require('../models')
 
 app.get('/', async (req, res) => {
-  const users = await Users.findAll()
-  res.render('index', users)
+  res.send("Welcome to Notes API")
 })
 
 module.exports = app
