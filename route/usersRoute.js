@@ -1,12 +1,12 @@
 const express = require('express')
 const app = express.Router()
-const { users } = require('../models')
+const { Users } = require('../models')
 const { nanoid } = require('nanoid')
 
 // https://sequelize.org/master/manual/model-querying-basics.html
 app.get('/user', async (req, res) => {
   const { withNotes } = req.query
-  const result = await users.findAll(
+  const result = await Users.findAll(
     withNotes
       ? { include: 'notes' }
       : {}
@@ -18,7 +18,7 @@ app.get('/user', async (req, res) => {
 })
 app.get('/user/:id', async (req, res) => {
   const { id } = req.params
-  const result = await users.findAll({
+  const result = await Users.findAll({
     where: {
       // id: id,
       // if property name and value variable is on the same name, we can shorten it like this
@@ -29,25 +29,26 @@ app.get('/user/:id', async (req, res) => {
 })
 app.post('/user', async (req, res) => {
   const { username, password, firstName, lastName } = req.body
-  const result = await users.create({
+  await Users.create({
     id: nanoid(),
     username,
     password,
     firstName,
     lastName
   })
-  res.send(result)
+  const result = await Users.findAll({})
+  res.render('index', result)
 })
 app.put('/user/:id', async (req, res) => {
   const { id } = req.params
-  await users.update(req.body, {
+  await Users.update(req.body, {
     where: { id }
   })
   res.send("ok")
 })
 app.delete('/user/:id', async (req, res) => {
   const { id } = req.params
-  await users.destroy({
+  await Users.destroy({
     where: { id }
   })
   res.send("ok")

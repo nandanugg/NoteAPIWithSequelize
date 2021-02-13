@@ -1,8 +1,8 @@
-// sequelize model:create --name notes --attributes note:string,userId:string,categoryId:string
+// sequelize model:create --name Notes --attributes note:string,userId:string,categoryId:string
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('notes', {
+    await queryInterface.createTable('Notes', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -13,16 +13,15 @@ module.exports = {
       },
       userId: {
         type: Sequelize.STRING,
-        // how to do a relation, more on how: https://medium.com/@eth3rnit3/sequelize-relationships-ultimate-guide-f26801a75554
         references: {
-          model: 'users',
+          model: 'Users',
           key: "id"
         }
       },
       categoryId: {
         type: Sequelize.STRING(21),
         references: {
-          model: 'categories',
+          model: 'Categories',
           key: "id"
         }
       },

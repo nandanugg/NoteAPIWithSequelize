@@ -1,14 +1,14 @@
 const express = require('express')
 const app = express.Router()
-const { notes } = require('../models')
+const { Notes } = require('../models')
 const { nanoid } = require('nanoid')
 
 // https://sequelize.org/master/manual/model-querying-basics.html
 app.get('/note', async (req, res) => {
   const { withNotes } = req.query
-  const result = await notes.findAll(
+  const result = await Notes.findAll(
     withNotes
-      ? { include: 'notes' }
+      ? { include: 'Notes' }
       : {}
   ).catch(error => {
     throw error
@@ -18,7 +18,7 @@ app.get('/note', async (req, res) => {
 })
 app.get('/note/:id', async (req, res) => {
   const { id } = req.params
-  const result = await notes.findAll({
+  const result = await Notes.findAll({
     where: {
       id
     }
@@ -27,7 +27,7 @@ app.get('/note/:id', async (req, res) => {
 })
 app.post('/note', async (req, res) => {
   const { note, categoryId, userId } = req.body
-  const result = await notes.create({
+  const result = await Notes.create({
     id: nanoid(),
     note,
     categoryId,
@@ -37,14 +37,14 @@ app.post('/note', async (req, res) => {
 })
 app.put('/note/:id', async (req, res) => {
   const { id } = req.params
-  await notes.update(req.body, {
+  await Notes.update(req.body, {
     where: { id }
   })
   res.send("ok")
 })
 app.delete('/note/:id', async (req, res) => {
   const { id } = req.params
-  await notes.destroy({
+  await Notes.destroy({
     where: { id }
   })
   res.send("ok")

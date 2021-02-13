@@ -1,10 +1,10 @@
-// sequelize model:create --name users --attributes username:string,password:string,firstName:string,lastName:string
+// sequelize model:create --name Users --attributes username:string,password:string,firstName:string,lastName:string
 'use strict';
 module.exports = {
   // because this model is required as reference in notes model, this model should be created first
   up: async (queryInterface, Sequelize) => {
     // things we can put in queryInterface: https://sequelize.org/master/manual/query-interface.html
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('Users', {
       // available data types: https://sequelize.org/master/manual/model-basics.html#data-types
       // in the doc, it says "DataTypes.STRING", just change the "DataTypes" to "Sequelize" for the migration
       id: {
