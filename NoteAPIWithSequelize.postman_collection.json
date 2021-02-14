@@ -291,7 +291,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"categoryId\", pm.response.json()[0].id);"
+									"pm.environment.set(\"noteId\", pm.response.json()[0].id);"
 								],
 								"type": "text/javascript"
 							}
@@ -321,7 +321,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"categoryId\", pm.response.json().id);"
+									"pm.environment.set(\"noteId\", pm.response.json()[0].id);"
 								],
 								"type": "text/javascript"
 							}
