@@ -3,7 +3,7 @@ const app = express.Router()
 const { Categories } = require('../models')
 const { nanoid } = require('nanoid')
 
-app.get('/category', async (req, res) => {
+app.get('/category', async (req, res, next) => {
   const { withNotes } = req.query
   const result = await Categories.findAll(
     withNotes
@@ -12,7 +12,7 @@ app.get('/category', async (req, res) => {
   ).catch(next)
   res.send(result)
 })
-app.post('/category', async (req, res) => {
+app.post('/category', async (req, res, next) => {
   const { name } = req.body
   const result = await Categories.create({
     id: nanoid(),
@@ -20,14 +20,14 @@ app.post('/category', async (req, res) => {
   }).catch(next)
   res.send(result)
 })
-app.put('/category/:id', async (req, res) => {
+app.put('/category/:id', async (req, res, next) => {
   const { id } = req.params
   await Categories.update(req.body, {
     where: { id }
   }).catch(next)
   res.send("ok")
 })
-app.delete('/category/:id', async (req, res) => {
+app.delete('/category/:id', async (req, res, next) => {
   const { id } = req.params
   await Categories.destroy({
     where: { id }

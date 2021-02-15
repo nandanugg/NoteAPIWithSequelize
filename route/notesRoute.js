@@ -3,7 +3,7 @@ const app = express.Router()
 const { Notes } = require('../models')
 const { nanoid } = require('nanoid')
 
-app.get('/note', async (req, res) => {
+app.get('/note', async (req, res, next) => {
   const { withNotes } = req.query
   const result = await Notes.findAll(
     withNotes
@@ -12,7 +12,7 @@ app.get('/note', async (req, res) => {
   ).catch(next)
   res.send(result)
 })
-app.get('/note/:id', async (req, res) => {
+app.get('/note/:id', async (req, res, next) => {
   const { id } = req.params
   const result = await Notes.findAll({
     where: { id }
@@ -29,14 +29,14 @@ app.post('/note', async (req, res, next) => {
   }).catch(next)
   res.send(result)
 })
-app.put('/note/:id', async (req, res) => {
+app.put('/note/:id', async (req, res, next) => {
   const { id } = req.params
   await Notes.update(req.body, {
     where: { id }
   }).catch(next)
   res.send("ok")
 })
-app.delete('/note/:id', async (req, res) => {
+app.delete('/note/:id', async (req, res, next) => {
   const { id } = req.params
   await Notes.destroy({
     where: { id }
