@@ -2,33 +2,33 @@ const express = require('express')
 const { get, add, edit, remove } = require('../controller/categoriesController')
 const app = express.Router()
 
-app.get('/', async (req, res) => {
-  const result = await get()
+app.get('/', async (req, res, next) => {
+  const result = await get().catch(next)
   res.send(result)
 })
 
-app.get('/:id', async (req, res) => {
+app.get('/:id', async (req, res, next) => {
   const { id } = req.params
-  const result = await get({ id })
+  const result = await get({ id }).catch(next)
   res.send(result)
 })
 
-app.post('/', async (req, res) => {
+app.post('/', async (req, res, next) => {
   const result = await add({
     ...req.body
-  })
+  }).catch(next)
   res.send(result)
 })
 
-app.put('/:id', async (req, res) => {
+app.put('/:id', async (req, res, next) => {
   const { id } = req.params
-  await edit({ id })
+  await edit({ id }).catch(next)
   res.send("ok")
 })
 
-app.delete('/:id', async (req, res) => {
+app.delete('/:id', async (req, res, next) => {
   const { id } = req.params
-  await remove({ id })
+  await remove({ id }).catch(next)
   res.send("ok")
 })
 
