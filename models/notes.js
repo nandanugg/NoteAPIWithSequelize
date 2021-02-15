@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // how to define associations: https://sequelize.org/master/manual/assocs.html
+      Notes.hasOne(models.Users, { as: 'from', foreignKey: 'id' })
+      Notes.hasOne(models.Categories, { as: 'category', foreignKey: 'id' })
     }
   };
   Notes.init({
