@@ -10,10 +10,7 @@ app.get('/user', async (req, res) => {
     withNotes
       ? { include: 'notes' }
       : {}
-  ).catch(error => {
-    throw error
-  })
-
+  ).catch(next)
   res.send(result)
 })
 app.get('/user/:id', async (req, res) => {
@@ -24,7 +21,7 @@ app.get('/user/:id', async (req, res) => {
       // if property name and value variable is on the same name, we can shorten it like this
       id
     }
-  })
+  }).catch(next)
   res.send(result)
 })
 app.post('/user', async (req, res) => {
@@ -35,21 +32,21 @@ app.post('/user', async (req, res) => {
     password,
     firstName,
     lastName
-  })
+  }).catch(next)
   res.send(result)
 })
 app.put('/user/:id', async (req, res) => {
   const { id } = req.params
   await Users.update(req.body, {
     where: { id }
-  })
+  }).catch(next)
   res.send("ok")
 })
 app.delete('/user/:id', async (req, res) => {
   const { id } = req.params
   await Users.destroy({
     where: { id }
-  })
+  }).catch(next)
   res.send("ok")
 })
 

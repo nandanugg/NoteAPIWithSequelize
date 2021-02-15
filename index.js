@@ -4,9 +4,6 @@ const express = require('express')
 const app = express()
 
 app.use(express.json())
-app.use(function (error, req, res, next) {
-  res.send(error)
-})
 
 const indexRoute = require('./route/indexRoute')
 const usersRoute = require('./route/usersRoute')
@@ -15,6 +12,9 @@ const notesRoute = require('./route/notesRoute')
 
 app.use(indexRoute, usersRoute, categoriesRoute, notesRoute)
 
+app.use(function (error, req, res, next) {
+  res.send(error)
+})
 
 // port is also a sensitive information, because each developer have their own port of choice
 const port = process.env.PORT
