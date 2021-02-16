@@ -20,7 +20,7 @@ app.post('/', async (req, res, next) => {
 
 app.put('/:id', async (req, res, next) => {
   const { id } = req.params
-  await edit({ id }).catch(next)
+  await edit(id, req.body).catch(next)
   res.send("ok")
 })
 
