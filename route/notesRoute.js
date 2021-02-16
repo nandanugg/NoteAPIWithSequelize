@@ -14,9 +14,7 @@ app.get('/:id', async (req, res, next) => {
 })
 
 app.post('/', async (req, res, next) => {
-  const result = await add({
-    ...req.body
-  }).catch(next)
+  const result = await add(req.body).catch(next)
   res.send(result)
 })
 
