@@ -34,7 +34,7 @@ app.put('/:id', async (req, res, next) => {
 
 app.delete('/:id', async (req, res, next) => {
   const { id } = req.params
-  await remove({ id }).catch(next)
+  await remove(id).catch(next)
   res.send("ok")
 })
 
