@@ -1,32 +1,10 @@
 const { Categories } = require('../models')
-const { nanoid } = require('nanoid')
+const BaseController = require('./baseController')
 
-function get(query) {
-  return Categories.findAll({ where: query })
+class CategoryController extends BaseController {
+  constructor() {
+    super(Categories)
+  }
 }
 
-function add(data) {
-  return Categories.create({
-    id: nanoid(),
-    ...data
-  })
-}
-
-function edit(id, data) {
-  return Categories.update(data, {
-    where: { id }
-  })
-}
-
-function remove(id) {
-  return Categories.destroy({
-    where: { id }
-  })
-}
-
-module.exports = {
-  add,
-  get,
-  edit,
-  remove
-}
+module.exports = CategoryController

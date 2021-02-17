@@ -1,32 +1,33 @@
 const express = require('express')
-const { get, add, edit, remove } = require('../controller/usersController')
+const UserControler = require('../controller/usersController')
+const user = new UserControler()
 const app = express.Router()
 
 app.get('/', async (req, res, next) => {
-  const result = await get().catch(next)
+  const result = await user.get().catch(next)
   res.send(result)
 })
 
 app.get('/:id', async (req, res, next) => {
   const { id } = req.params
-  const result = await get({ id }).catch(next)
+  const result = await user.get({ id }).catch(next)
   res.send(result)
 })
 
 app.post('/', async (req, res, next) => {
-  const result = await add(req.body).catch(next)
+  const result = await user.add(req.body).catch(next)
   res.send(result)
 })
 
 app.put('/:id', async (req, res, next) => {
   const { id } = req.params
-  await edit(id, req.body).catch(next)
+  await user.edit(id, req.body).catch(next)
   res.send("ok")
 })
 
 app.delete('/:id', async (req, res, next) => {
   const { id } = req.params
-  await remove(id).catch(next)
+  await user.remove(id).catch(next)
   res.send("ok")
 })
 

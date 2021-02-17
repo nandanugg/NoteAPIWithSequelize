@@ -1,32 +1,10 @@
 const { Notes } = require('../models')
-const { nanoid } = require('nanoid')
+const BaseController = require('./baseController')
 
-function get(query) {
-  return Notes.findAll({ where: query })
+class NoteController extends BaseController {
+  constructor() {
+    super(Notes)
+  }
 }
 
-function add(data) {
-  return Notes.create({
-    id: nanoid(),
-    ...data
-  })
-}
-
-function edit(id, data) {
-  return Notes.update(data, {
-    where: { id }
-  })
-}
-
-function remove(id) {
-  return Notes.destroy({
-    where: { id }
-  })
-}
-
-module.exports = {
-  add,
-  get,
-  edit,
-  remove
-}
+module.exports = NoteController

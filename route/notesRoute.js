@@ -1,9 +1,10 @@
 const express = require('express')
-const { get, add, edit, remove } = require('../controller/notesController')
+const NoteController = require('../controller/notesController')
+const note = new NoteController()
 const app = express.Router()
 
 app.get('/', async (req, res, next) => {
-  const result = await get({
+  const result = await note.get({
     userId: req.user.id,
   }).catch(next)
   res.send(result)
@@ -11,7 +12,7 @@ app.get('/', async (req, res, next) => {
 
 app.get('/:id', async (req, res, next) => {
   const { id } = req.params
-  const result = await get({
+  const result = await note.get({
     id,
     userId: req.user.id,
   }).catch(next)
@@ -19,7 +20,7 @@ app.get('/:id', async (req, res, next) => {
 })
 
 app.post('/', async (req, res, next) => {
-  const result = await add({
+  const result = await note.add({
     userId: req.user.id,
     ...req.body
   }).catch(next)
@@ -28,13 +29,13 @@ app.post('/', async (req, res, next) => {
 
 app.put('/:id', async (req, res, next) => {
   const { id } = req.params
-  await edit(id, req.body).catch(next)
+  await note.edit(id, req.body).catch(next)
   res.send("ok")
 })
 
 app.delete('/:id', async (req, res, next) => {
   const { id } = req.params
-  await remove(id).catch(next)
+  await note.remove(id).catch(next)
   res.send("ok")
 })
 
