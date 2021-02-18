@@ -38,7 +38,7 @@ module.exports = {
       ssl: true,
     },
     // native: true,
-    // ssl: true,
+    ssl: true,
     // this will make log that sequelize output from queries gone
     logging: false
   }
