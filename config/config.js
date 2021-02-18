@@ -35,6 +35,7 @@ module.exports = {
     "host": DB_HOST,
     "dialect": DB_DIALECT,
     native: true,
+    ssl: true
     // this will make log that sequelize output from queries gone
     logging: false
   }
