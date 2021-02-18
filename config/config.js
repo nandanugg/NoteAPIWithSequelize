@@ -29,14 +29,6 @@ module.exports = {
     "dialect": "mysql"
   },
   "production": {
-    "username": DB_USERNAME,
-    "password": DB_PASSWORD,
-    "database": DB_DATABASE,
-    "host": DB_HOST,
-    "dialect": DB_DIALECT,
-    native: true,
-    ssl: true,
-    // this will make log that sequelize output from queries gone
-    logging: false
+    "use_env_variable": process.env.DATABASE_URL
   }
 }
