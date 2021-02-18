@@ -10,7 +10,6 @@
 require('dotenv').config()
 
 // destructure environment variables
-console.log('DATABASE_URL:', process.env.DATABASE_URL);
 const { DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_HOST, DB_DIALECT } = process.env
 module.exports = {
   "development": {
@@ -30,6 +29,6 @@ module.exports = {
     "dialect": "mysql"
   },
   "production": {
-    "use_env_variable": process.env.DATABASE_URL
+    "use_env_variable": "DATABASE_URL"
   }
 }
