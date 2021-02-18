@@ -2,6 +2,7 @@ const { Users } = require('../models')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const BaseController = require('./baseController')
+const { nanoid } = require('nanoid')
 
 class UserControler extends BaseController {
   constructor() {
