@@ -9,7 +9,7 @@ postgres addon
 `heroku addons --all` list addon with current app
 `heroku pg:credentials:url` see postgress credential
 
-`heroku config:set JWT_SECRET="Paraguay withdrawal"`
+`heroku config:set JWT_SECRET="Paraguay withdrawal" PGSSLMODE=no-verify` 
 heroku config -s
 
 `npm i -D sequelize-cli`
