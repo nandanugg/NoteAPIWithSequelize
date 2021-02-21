@@ -1,37 +1,33 @@
 const express = require('express')
+const { get, add, edit, remove } = require('../controller/categoriesController')
 const app = express.Router()
 const { Categories } = require('../models')
 const { nanoid } = require('nanoid')
 
-app.get('/category', async (req, res, next) => {
-  const { withNotes } = req.query
-  const result = await Categories.findAll(
-    withNotes
-      ? { include: 'notes' }
-      : {}
-  ).catch(next)
+app.get('/', async (req, res, next) => {
+  const result = await get().catch(next)
   res.send(result)
 })
-app.post('/category', async (req, res, next) => {
-  const { name } = req.body
-  const result = await Categories.create({
-    id: nanoid(),
-    name
-  }).catch(next)
-  res.send(result)
-})
-app.put('/category/:id', async (req, res, next) => {
+
+app.get('/:id', async (req, res, next) => {
   const { id } = req.params
-  await Categories.update(req.body, {
-    where: { id }
-  }).catch(next)
+  const result = await get({ id }).catch(next)
+  res.send(result)
+})
+
+app.post('/', async (req, res, next) => {
+  const result = await add(req.body).catch(next)
+  res.send(result)
+})
+
+app.put('/:id', async (req, res, next) => {
+  const { id } = req.params
+  await edit(id, req.body).catch(next)
   res.send("ok")
 })
 app.delete('/category/:id', async (req, res, next) => {
   const { id } = req.params
-  await Categories.destroy({
-    where: { id }
-  }).catch(next)
+  await remove(id).catch(next)
   res.send("ok")
 })
 
